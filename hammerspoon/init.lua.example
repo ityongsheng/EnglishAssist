@@ -1,0 +1,2 @@
+package.path = os.getenv("HOME") .. "/EnglishAssist/app/hammerspoon/?.lua;" .. package.path
+require("english_assist").start()

@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+src/english_assist.egg-info/
+config/
+data/
+logs/
+*.jsonl
