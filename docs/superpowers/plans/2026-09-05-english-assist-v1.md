@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a macOS English-writing helper where `Option+Space` opens a Chinese popup, `Enter` sends only that fragment to DeepSeek, and the returned natural English is inserted at the original caret while the phrase is recorded locally.
+**Goal:** Build a macOS English-writing helper where `Shift+Space` opens a Chinese popup, `Enter` sends only that fragment to DeepSeek, and the returned natural English is inserted at the original caret while the phrase is recorded locally.
 
 **Architecture:** Hammerspoon owns global hotkeys, popup UI, input-source switching, focus restoration, clipboard preservation, and paste insertion. A Python package owns configuration, Keychain access, DeepSeek API calls, response validation, logging, and append-only phrase storage. Hammerspoon launches Python asynchronously with `hs.task`, sends user text through stdin, and records a phrase only after paste is considered successful.
 
@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- Global trigger is exactly `Option+Space`.
+- Global trigger is exactly `Shift+Space`.
 - The original document must remain unchanged while translation is pending.
 - `Esc` cancels without changing the document or writing a phrase record.
 - Only the popup fragment is sent to DeepSeek; never read or upload the whole document.
@@ -957,7 +957,7 @@ git commit -m "feat: add IME-safe translation popup"
 **Interfaces:**
 - Public Lua entry point: `require("english_assist").start()`.
 - State values: `idle`, `editing`, `translating`, `error`.
-- `Option+Space` ignored while state is `translating`; while popup is visible in `editing/error`, bring it forward rather than opening a duplicate.
+- `Shift+Space` ignored while state is `translating`; while popup is visible in `editing/error`, bring it forward rather than opening a duplicate.
 - Python executable: `~/EnglishAssist/.venv/bin/python` in installed layout.
 - Translation task: `python -m english_assist.cli translate`; source passed with `task:setInput(text)`.
 
@@ -1002,7 +1002,7 @@ end
 Register:
 
 ```lua
-local hotkey = hs.hotkey.bind({"alt"}, "space", function()
+local hotkey = hs.hotkey.bind({"shift"}, "space", function()
   if state.mode == "translating" then return end
   if state.popup and state.popup:isVisible() then
     state.popup:bringToFront(true)
@@ -1172,7 +1172,7 @@ return M
 With a temporary config containing valid input-source IDs, reload Hammerspoon and verify:
 
 ```text
-Option+Space -> popup appears
+Shift+Space -> popup appears
 popup -> Chinese input source active
 Esc -> popup disappears, prior app refocuses, previous input source restored
 Enter -> popup shows Translating… and duplicate Enter does nothing
@@ -1363,7 +1363,7 @@ Also verify:
 - Close target window while popup is open -> no paste into another app.
 - Switch to another app while translating -> finish focuses only the captured original target.
 - Kill network -> no document change; popup shows retry.
-- Press Option+Space during translation -> no second request.
+- Press Shift+Space during translation -> no second request.
 ```
 
 - [ ] **Step 8: Commit safe insertion flow**
@@ -1486,7 +1486,7 @@ Expected: every Python unit test PASS.
 
 ```text
 [ ] English is the normal input source before invocation.
-[ ] Option+Space opens one popup and does not alter the document.
+[ ] Shift+Space opens one popup and does not alter the document.
 [ ] Popup automatically switches to configured Chinese input source.
 [ ] Chinese IME candidate selection with Enter does not accidentally submit mid-composition.
 [ ] Enter after composition sends one DeepSeek request.

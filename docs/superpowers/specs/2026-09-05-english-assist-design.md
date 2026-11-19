@@ -10,7 +10,7 @@ Build a lightweight macOS English-writing assistant for a user who normally writ
 The primary interaction is:
 
 1. The user is typing in any normal macOS text field with English as the default input language.
-2. The user presses `Option+Space`.
+2. The user presses `Shift+Space`.
 3. English Assist opens a small floating input window near the active app and automatically switches that input box to Chinese input.
 4. The user types Chinese and presses `Enter`.
 5. English Assist sends the Chinese text to the DeepSeek API.
@@ -25,7 +25,7 @@ The tool is not a replacement for Apple Writing Tools. DeepSeek handles “I do 
 
 V1 includes only:
 
-- Global hotkey: `Option+Space`.
+- Global hotkey: `Shift+Space`.
 - Floating Chinese input box.
 - Automatic temporary switch to a configured Chinese input source.
 - `Enter` to translate.
@@ -61,7 +61,7 @@ Use a small two-layer architecture.
 
 Responsibilities:
 
-- Register global `Option+Space`.
+- Register global `Shift+Space`.
 - Capture the currently focused application/window before opening the assistant.
 - Remember the current macOS input source.
 - Open and focus the floating input UI.
@@ -99,7 +99,7 @@ Suggested modules:
 
 ### 4.1 Opening
 
-When `Option+Space` is pressed:
+When `Shift+Space` is pressed:
 
 - Store the currently focused app/window reference.
 - Store the current input source.
@@ -357,7 +357,7 @@ Conceptual fields:
 {
   "model": "<deepseek-low-latency-model>",
   "timeout_seconds": 15,
-  "hotkey": "alt+space",
+  "hotkey": "shift+space",
   "restore_to_english": true,
   "english_input_source": "<macOS-input-source-id>",
   "chinese_input_source": "<macOS-input-source-id>"
@@ -378,7 +378,7 @@ The implementation must handle at least:
 - API returns empty output.
 - API returns malformed structured output.
 - Popup submitted with empty text.
-- User presses `Option+Space` while popup is already open.
+- User presses `Shift+Space` while popup is already open.
 - Original target app/window disappears.
 - Paste is not accepted by the target app.
 - Chinese input source is unavailable.
@@ -431,7 +431,7 @@ Any app that blocks synthetic paste can be documented as unsupported rather than
 V1 is complete when all of the following are true:
 
 1. The user can type English normally with English as the default input source.
-2. `Option+Space` opens a small assistant input box without changing the original document.
+2. `Shift+Space` opens a small assistant input box without changing the original document.
 3. The assistant input box accepts Chinese input and supports `Enter` / `Esc`.
 4. The assistant can automatically switch to the configured Chinese input source.
 5. On successful DeepSeek translation, natural English is inserted at the original caret position.

@@ -3,14 +3,14 @@
 English Assist is a small macOS writing helper for one workflow:
 
 ```text
-write English -> Option+Space -> type Chinese -> Enter -> DeepSeek -> English is pasted at the original caret -> keep writing
+write English -> Shift+Space -> type Chinese -> Enter -> DeepSeek -> English is pasted at the original caret -> keep writing
 ```
 
 Successful Chinese→English pairs are appended to `~/EnglishAssist/data/phrases.jsonl` so the expressions you personally needed become your own English corpus.
 
 ## What V1 does
 
-- Global `Option+Space` shortcut.
+- Global `Shift+Space` shortcut.
 - Floating Chinese input popup.
 - Temporary switch to your configured Chinese input source.
 - `Enter` translates; `Shift+Enter` inserts a newline; `Esc` cancels.
@@ -121,7 +121,7 @@ Reload Hammerspoon config after changing permissions/configuration.
 ## Use
 
 1. Put the caret where the English should go.
-2. Press `Option+Space`.
+2. Press `Shift+Space`.
 3. Type the Chinese idea in the popup.
 4. Press `Enter`.
 5. Keep writing when the natural English is inserted.

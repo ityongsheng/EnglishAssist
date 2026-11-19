@@ -4,7 +4,7 @@ from pathlib import Path
 def test_hammerspoon_script_contains_v1_safety_contract():
     lua = Path("hammerspoon/english_assist.lua").read_text(encoding="utf-8")
     required = [
-        'hs.hotkey.bind({"alt"}, "space"',
+        'hs.hotkey.bind({"shift"}, "space"',
         'hs.webview.usercontent.new("englishAssistBridge")',
         'hs.keycodes.currentSourceID',
         'hs.task.new',

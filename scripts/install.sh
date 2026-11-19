@@ -94,7 +94,7 @@ Next steps:
   4. Enable Hammerspoon in:
      System Settings -> Privacy & Security -> Accessibility
 
-  5. Reload Hammerspoon config, then type in any editor and press Option+Space.
+  5. Reload Hammerspoon config, then type in any editor and press Shift+Space.
 
 Run diagnostics anytime with:
   $ROOT/scripts/doctor.sh

@@ -428,7 +428,7 @@ end
 
 function M.start()
   if M._hotkey then M._hotkey:delete() end
-  M._hotkey = hs.hotkey.bind({"alt"}, "space", function()
+  M._hotkey = hs.hotkey.bind({"shift"}, "space", function()
     if state.mode == "translating" then return end
     if state.popup and state.popup:isVisible() then
       focusPopup()
